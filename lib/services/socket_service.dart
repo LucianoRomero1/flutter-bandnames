@@ -5,25 +5,29 @@ enum ServerStatus { Online, Offline, Connecting }
 
 class SocketService with ChangeNotifier {
   ServerStatus _serverStatus = ServerStatus.Connecting;
+  late IO.Socket _socket;
 
-  get serverStatus => _serverStatus;
+  ServerStatus get serverStatus => _serverStatus;
+  IO.Socket get socket => _socket;
+
+  Function get emit => _socket.emit;
 
   SocketService() {
     _initConfig();
   }
 
   void _initConfig() {
-    IO.Socket socket = IO.io('http://localhost:3000', {
+    _socket = IO.io('http://localhost:3000', {
       'transports': ['websocket'],
       'autoConnect': true
     });
 
-    socket.on('connect', (_) {
+    _socket.on('connect', (_) {
       _serverStatus = ServerStatus.Online;
       notifyListeners();
     });
 
-    socket.on('disconnect', (_) {
+    _socket.on('disconnect', (_) {
       _serverStatus = ServerStatus.Offline;
       notifyListeners();
     });
