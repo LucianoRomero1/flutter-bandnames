@@ -139,6 +139,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.2"
+  pie_chart:
+    dependency: "direct main"
+    description:
+      name: pie_chart
+      sha256: "40c05082783d65894818ba5de17a403392cb77ce12fb6f8c48dc8ffd75cf5d2a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.1"
   provider:
     dependency: "direct main"
     description:
